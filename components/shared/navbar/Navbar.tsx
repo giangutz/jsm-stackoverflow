@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { SignedIn } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
+import Theme from "./Theme";
+import MobileNav from "./MobileNav";
+import GlobalSearch from "../search/GlobalSearch";
+
 
 
 const Navbar = () => {
@@ -20,9 +24,10 @@ const Navbar = () => {
         </p>
       </Link>
 
-      Global Search
+      <GlobalSearch />
+      
       <div className="flex-between gap-5">
-        Theme
+        <Theme />
         <SignedIn>
           <UserButton afterSignOutUrl="/"
           appearance={{
@@ -35,7 +40,7 @@ const Navbar = () => {
           }}/>
         </SignedIn>
 
-        MobileNav
+        <MobileNav />
       </div>
     </nav>
   );
