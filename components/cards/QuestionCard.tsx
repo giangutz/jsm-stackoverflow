@@ -5,15 +5,15 @@ import Metric from "../shared/Metric";
 import { formatandDivideNumber, getTimestamps } from "@/lib/utils";
 
 interface QuestionProps {
-  key: string;
-  _id: string;
+  key: number;
+  _id: number;
   title: string;
   tags: {
-    _id: string;
+    _id: number;
     name: string;
   }[];
   author: {
-    _id: string;
+    _id: number;
     name: string;
     picture: string;
   };
@@ -59,7 +59,7 @@ const QuestionCard = ({
         <Metric
           imgUrl="/assets/icons/avatar.svg"
           alt="user"
-          value={author}
+          value={author.name}
           title={`- asked ${getTimestamps(createdAt)}`}
           href={`/profile/${author._id}`}
           isAuthor

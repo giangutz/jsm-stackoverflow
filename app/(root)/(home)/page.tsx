@@ -15,11 +15,15 @@ const questions = [
       { _id: 1, name: "python" },
       { _id: 2, name: "sql" },
     ],
-    author: "John Doe",
+    author: {
+      _id: 1,
+      name: "Python",
+      picture: "/assets/icons/avatar.svg",
+    },
     upvotes: 93914912941,
     views: 5435241,
     answers: [],
-    createdAt: "2023-10-10T12:00:00.000Z",
+    createdAt: new Date ("2023-10-10T12:00:00.000Z"),
   },
   {
     _id: 2,
@@ -28,12 +32,16 @@ const questions = [
       { _id: 1, name: "html" },
       { _id: 2, name: "ccs" },
     ],
-    author: "John Doe",
+    author: {
+      _id: 1,
+      name: "Python",
+      picture: "/assets/icons/avatar.svg",
+    },
     upvotes: 321,
     views: 50,
     answers: [],
-    createdAt: "2023-10-11T08:20:00.000Z",
-  }
+    createdAt: new Date ("2023-10-11T08:20:00.000Z"),
+  },
 ];
 
 export default function Home() {
@@ -68,7 +76,19 @@ export default function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
-          questions.map((question) => <QuestionCard key={question._id} _id={question._id} title={question.title} tags={question.tags} author={question.author} upvotes={question.upvotes} views={question.views} answer={question.answers} createdAt={question.createdAt} />)
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answer={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResults
             title="There are no question to show"
