@@ -50,13 +50,14 @@ export async function POST(req: Request) {
     })
   }
  
+  // Get the ID and type
   const eventType = evt.type;
-
-  console.log({eventType})
  
+  console.log(eventType)
+
   if(eventType === 'user.created') {
     const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
-
+    console.log("evt.data: " + id, email_addresses, image_url, username, first_name, last_name);
     // Create a new user in your database
     const mongoUser = await createUser({
       clerkId: id,
@@ -65,12 +66,13 @@ export async function POST(req: Request) {
       email: email_addresses[0].email_address,
       picture: image_url,
     })
-
+    console.log("mongoUser: " + mongoUser);
     return NextResponse.json({ message: 'OK', user: mongoUser})
   }
   
   if(eventType === 'user.updated') {
     const { id, email_addresses, image_url, username, first_name, last_name } = evt.data;
+    console.log("evt.data: " + id, email_addresses, image_url, username, first_name, last_name);
 
     // Create a new user in your database
     const mongoUser = await updateUser({
@@ -83,19 +85,20 @@ export async function POST(req: Request) {
       },
       path: `/profile/${id}`
     })
+    console.log("mongoUser: " + mongoUser);
 
     return NextResponse.json({ message: 'OK', user: mongoUser})
   }
 
   if(eventType === 'user.deleted') {
     const { id } = evt.data;
-
+    console.log("evt.data: " + id);
     const deletedUser = await deleteUser({
       clerkId: id!,
     })
-
+    console.log("deletedUser: " + deletedUser);
     return NextResponse.json({ message: 'OK', user: deletedUser})
   }
- 
+  
   return new Response('', { status: 201 })
 }
