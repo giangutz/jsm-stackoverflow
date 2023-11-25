@@ -4,7 +4,7 @@ import React from 'react'
 
 interface ProfileLinkProps {
   imgUrl: string
-  href: string
+  href?: string
   title: string
 }
 

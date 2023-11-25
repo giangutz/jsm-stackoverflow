@@ -72,3 +72,20 @@ export const formUrlQuery = ({ params, key, value}: UrlQueryParams) => {
   },
   { skipNull: true})
 }
+
+export const getJoinedDate = (date: Date): string => {
+  // get month name
+  // const monthNumber = date.getMonth(); // Get the month as a number (0-11)
+  const monthNames = [
+    'January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'
+  ];
+  const month = monthNames[new Date(date).getMonth()];
+  const year = new Date(date).getFullYear();
+
+  // Create the joined date string (e.g., "September 2023")
+  const joinedDate = `Joined ${month} ${year}`;
+
+  return joinedDate;
+}
