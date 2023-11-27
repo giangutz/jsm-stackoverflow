@@ -6,21 +6,25 @@ import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs";
-import React from 'react'
+import React from "react";
 
-export default async function Home({ searchParams}: SearchParamsProps) {
+export default async function Home({ searchParams }: SearchParamsProps) {
   const { userId } = auth();
 
   if (!userId) return null;
 
-  const result = await getSavedQuestions({ clerkId: userId, searchQuery: searchParams.q, });
+  const result = await getSavedQuestions({
+    clerkId: userId,
+    searchQuery: searchParams.q,
+    filter: searchParams.filter
+  });
 
   return (
     <>
-      <h1 className="h1-bold text-dark100_light900">Saved Questions</h1> 
+      <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
-        <LocalSearchbar 
+        <LocalSearchbar
           route="/collection"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
@@ -35,9 +39,9 @@ export default async function Home({ searchParams}: SearchParamsProps) {
       </div>
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {result.questions.length > 0 ?
+        {result.questions.length > 0 ? (
           result.questions.map((question) => (
-            <QuestionCard 
+            <QuestionCard
               key={question._id}
               _id={question._id}
               title={question.title}
@@ -49,13 +53,15 @@ export default async function Home({ searchParams}: SearchParamsProps) {
               createdAt={question.createdAt}
             />
           ))
-          : <NoResult 
+        ) : (
+          <NoResult
             title="There’s no saved question to show"
             description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
             link="/ask-question"
             linkTitle="Ask a Question"
-          />}
+          />
+        )}
       </div>
     </>
-  )
+  );
 }
