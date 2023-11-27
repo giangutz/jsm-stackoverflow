@@ -73,6 +73,25 @@ export const formUrlQuery = ({ params, key, value}: UrlQueryParams) => {
   { skipNull: true})
 }
 
+interface removeUrlQueryParams {
+  params: string;
+  keysToRemove: string[];
+}
+
+export const removeKeysFromQuery = ({ params, keysToRemove}: removeUrlQueryParams) => {
+  const currentUrl = qs.parse(params);
+
+  keysToRemove.forEach(key => {
+    delete currentUrl[key];
+  })
+  
+  return qs.stringifyUrl({
+    url: window.location.pathname,
+    query: currentUrl,
+  },
+  { skipNull: true})
+}
+
 export const getJoinedDate = (date: Date): string => {
   // get month name
   // const monthNumber = date.getMonth(); // Get the month as a number (0-11)

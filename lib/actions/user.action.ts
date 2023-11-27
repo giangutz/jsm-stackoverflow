@@ -100,25 +100,25 @@ export async function getAllUsers(params: GetAllUsersParams) {
       ]
     }
 
-    let sortOptions = {};
+    // let sortOptions = {};
 
-    switch (filter) {
-      case "new_users":
-        sortOptions = { joinedAt: -1 }
-        break;
-      case "old_users":
-        sortOptions = { joinedAt: 1 }
-        break;
-      case "top_contributors":
-        sortOptions = { reputation: -1 }
-        break;
+    // switch (filter) {
+    //   case "new_users":
+    //     sortOptions = { joinedAt: -1 }
+    //     break;
+    //   case "old_users":
+    //     sortOptions = { joinedAt: 1 }
+    //     break;
+    //   case "top_contributors":
+    //     sortOptions = { reputation: -1 }
+    //     break;
     
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
 
     const users = await User.find(query)
-      .sort(sortOptions)
+      // .sort(sortOptions)
       .skip(skipAmount)
       .limit(pageSize)
 
