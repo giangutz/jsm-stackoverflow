@@ -20,6 +20,7 @@ import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { createQuestion, editQuestion } from '@/lib/actions/question.action';
 import { useRouter, usePathname } from 'next/navigation';
+import { toast } from '../ui/use-toast';
 
 interface Props {
   type?: string;
@@ -57,6 +58,9 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           content: values.explanation,
           path: pathname
         })
+        toast({
+          title: 'Question edited successfully',
+        })
       } else {
         await createQuestion({
           title: values.title,
@@ -65,6 +69,9 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           author: JSON.parse(mongoUserId),
           path: pathname,
         });
+        toast({
+          title: 'Question posted successfully'
+        })
       }
 
       // navigate to home page
