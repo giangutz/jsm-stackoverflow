@@ -54,6 +54,8 @@ const GlobalSearch = () => {
         }
       }
     }, 300)
+
+    return () => clearTimeout(delayDebounceFn)
   }, [search, router, pathname, searchParams, query])
 
   return (
