@@ -3,6 +3,12 @@ import { getUserById } from "@/lib/actions/user.action";
 import { auth } from '@clerk/nextjs';
 import { redirect } from "next/navigation";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DevOverflow | Ask a question",
+  description: "A developer community that happily helps each other on their coding problems",
+};
 
 const Page = async () => {
   const { userId } = auth();
